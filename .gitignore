@@ -1,0 +1,40 @@
+
+node_modules
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+ENV/
+env/
+venv/
+build/
+*.egg-info/
+*.egg
+
+# SQLite database
+*.sqlite3
+*.db
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Vite/Frontend
+/dist/
+/.vite/
+
+# Misc
+.idea/
+*.iml
+.vscode/

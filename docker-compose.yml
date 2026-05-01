@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: mvp_postgres
+    environment:
+      POSTGRES_USER: mvp_user
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: mvp_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "mvp_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+    container_name: mvp_backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: "postgresql+asyncpg://mvp_user:secretpassword@db:5432/mvp_db"
+      JWT_SECRET_KEY: "super-secret-key-change-me"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  pgdata:
+

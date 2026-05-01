@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #2c3e50; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .totals { margin-top: 20px; width: 50%; float: right; }
+    </style>
+</head>
+<body>
+    <h1>Factura Electrónica</h1>
+    <p><strong>Emisor:</strong> {{ emisor_name }} (NIT {{ emisor_nit }})</p>
+    <p><strong>Receptor:</strong> {{ client.name }} (NIT {{ client.nit }})</p>
+    <p><strong>Fecha de emisión:</strong> {{ issue_date }}</p>
+    <p><strong>CUFE:</strong> {{ cufe }}</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Producto / Servicio</th>
+                <th>Código</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>IVA (%)</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for line in lines %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ line.product_name }}</td>
+                <td>{{ line.product_code }}</td>
+                <td>{{ line.quantity }}</td>
+                <td>{{ "%.2f"|format(line.unit_price) }}</td>
+                <td>{{ line.iva_percent }}</td>
+                <td>{{ "%.2f"|format(line.total_price + line.iva_amount) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="totals">
+        <p><strong>Subtotal:</strong> {{ "%.2f"|format(subtotal) }}</p>
+        <p><strong>IVA Total:</strong> {{ "%.2f"|format(iva_total) }}</p>
+        <p><strong>Total:</strong> {{ "%.2f"|format(total_amount) }} {{ currency }}</p>
+    </div>
+</body>
+</html>
