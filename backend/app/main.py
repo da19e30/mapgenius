@@ -12,7 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 from app.middleware.auth_middleware import jwt_auth_middleware
-from app.routers import auth, invoices, tax
+from app.routers import auth, invoices, tax, health
 
 app = FastAPI(title=settings.APP_NAME, debug=settings.DEBUG)
 
@@ -32,6 +32,7 @@ app.middleware("http")(jwt_auth_middleware)
 app.include_router(auth.router)
 app.include_router(invoices.router)
 app.include_router(tax.router)
+app.include_router(health.router)
 
 if __name__ == "__main__":
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
