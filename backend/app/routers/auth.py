@@ -7,7 +7,9 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app import crud, schemas
-from app.core.security import create_access_token, create_refresh_token, verify_password, decode_token
+from app.core.security import create_access_token, create_refresh_token, verify_password, decode_token, decode_without_verify
+from datetime import datetime, timezone
+from app.models.revoked_token import RevokedToken
 from fastapi import Body
 from app.db.session import get_db
 
@@ -53,3 +55,27 @@ async def refresh_token(payload: dict = Body(...), db: AsyncSession = Depends(ge
     access = create_access_token({"sub": user_id})
     new_refresh = create_refresh_token({"sub": user_id})
     return schemas.Token(access_token=access, refresh_token=new_refresh)
+
+@router.post("/revoke", response_model=dict)
+async def revoke_token(payload: dict = Body(...), db: AsyncSession = Depends(get_db)):
+    """Revoke a refresh token.
+
+    Expected payload: {"refresh_token": "<token>"}
+    The token's ``jti`` and ``exp`` are stored in ``revoked_tokens``.
+    """
+    token = payload.get("refresh_token")
+    if not token:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="refresh_token missing")
+    # Decode without verifying signature to read jti and exp
+    try:
+        payload_data = decode_without_verify(token)
+        jti = payload_data.get("jti")
+        exp_ts = payload_data.get("exp")
+        if not jti or not exp_ts:
+            raise ValueError("Missing jti or exp")
+        expires_at = datetime.fromtimestamp(exp_ts, tz=timezone.utc)
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid token format")
+    # Store revocation
+    await crud.revoked_token.revoke(db, jti=jti, expires_at=expires_at)
+    return {"detail": "Token revoked"}

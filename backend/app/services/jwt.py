@@ -19,6 +19,8 @@ from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from app.database import get_db
 from app.models.user import User
+from app.core.security import decode_without_verify
+from app.crud.revoked_token import is_revoked
 
 # Contexto de hash para contraseñas
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -103,6 +105,12 @@ async def get_current_user(
         email: str = payload.get("sub")
         if email is None:
             raise credentials_exception
+        # Check revocation using jti claim (if present)
+        jti = payload.get("jti")
+        if jti:
+            rev = db.query(RevokedToken).filter(RevokedToken.jti == jti).first()
+            if rev:
+                raise credentials_exception
     except JWTError:
         raise credentials_exception
 

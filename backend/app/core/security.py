@@ -29,7 +29,12 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 # JWT handling
 # ---------------------------------------------------------------------------
 
+import uuid
+
 def _create_token(data: dict[str, Any], expires_delta: timedelta) -> str:
+    # Ensure a unique JWT ID (jti) for revocation tracking
+    if "jti" not in data:
+        data["jti"] = str(uuid.uuid4())
     to_encode = data.copy()
     expire = datetime.utcnow() + expires_delta
     to_encode.update({"exp": expire})
@@ -46,6 +51,19 @@ def create_refresh_token(subject: dict[str, Any]) -> str:
 
 
 def decode_token(token: str) -> dict[str, Any]:
+    try:
+        payload = jwt.decode(token, settings.JWT_SECRET_KEY.get_secret_value(), algorithms=[settings.JWT_ALGORITHM])
+        return payload
+    except JWTError as exc:
+        raise exc  # Caller will translate to HTTPException
+
+
+def decode_without_verify(token: str) -> dict[str, Any]:
+    """Decode a JWT without signature verification.
+    Useful for extracting ``jti`` and ``exp`` when we only need to check revocation.
+    """
+    # jose.jwt provides ``options`` to skip verification
+    return jwt.decode(token, options={"verify_signature": False})
     try:
         payload = jwt.decode(token, settings.JWT_SECRET_KEY.get_secret_value(), algorithms=[settings.JWT_ALGORITHM])
         return payload
