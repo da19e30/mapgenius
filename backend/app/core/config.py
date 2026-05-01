@@ -3,7 +3,8 @@
 All secrets must be stored in environment variables; .env is for local development only.
 """
 
-from pydantic import BaseSettings, Field, PostgresDsn, SecretStr
+from pydantic_settings import BaseSettings
+from pydantic import Field, PostgresDsn, SecretStr
 
 class Settings(BaseSettings):
     APP_NAME: str = "MapGenius SaaS"

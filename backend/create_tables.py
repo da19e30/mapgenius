@@ -25,6 +25,7 @@ from app.database import engine, Base, init_db
 from app.models.user import User  # noqa: F401
 from app.models.invoice import Invoice  # noqa: F401
 from app.models.financial_data import FinancialData  # noqa: F401
+from app.models.revoked_token import RevokedToken  # noqa: F401
 
 def main() -> None:
     """Crea las tablas en la base de datos configurada.
@@ -34,9 +35,9 @@ def main() -> None:
     try:
         # init_db ya llama a ``Base.metadata.create_all``
         init_db()
-        print("✅  Todas las tablas fueron creadas (o ya existían) en la base de datos.")
+        print("All tables created (or already existed) in the database.")
     except Exception as exc:
-        print("❌  Error al crear las tablas:")
+        print("Error creating tables:")
         print(exc)
 
 if __name__ == "__main__":
