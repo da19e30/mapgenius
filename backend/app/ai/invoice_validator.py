@@ -6,7 +6,7 @@ The validator can be extended with a machine‑learning model for anomaly detect
 for the MVP we keep it rule‑based.
 """
 
-from pydantic import BaseModel, validator, ValidationError
+from pydantic import BaseModel, field_validator, ValidationError
 from typing import List
 
 class LineItemModel(BaseModel):
@@ -15,19 +15,19 @@ class LineItemModel(BaseModel):
     unit_price: float
     iva_percent: float
 
-    @validator("quantity")
+    @field_validator("quantity")
     def quantity_positive(cls, v):
         if v <= 0:
             raise ValueError("La cantidad debe ser mayor que 0")
         return v
 
-    @validator("unit_price")
+    @field_validator("unit_price")
     def unit_price_non_negative(cls, v):
         if v < 0:
             raise ValueError("El precio unitario no puede ser negativo")
         return v
 
-    @validator("iva_percent")
+    @field_validator("iva_percent")
     def iva_valid_range(cls, v):
         if not (0 <= v <= 100):
             raise ValueError("El porcentaje de IVA debe estar entre 0 y 100")
@@ -37,7 +37,7 @@ class InvoicePayloadModel(BaseModel):
     client_id: int
     line_items: List[LineItemModel]
 
-    @validator("line_items")
+    @field_validator("line_items")
     def at_least_one_line(cls, v):
         if len(v) == 0:
             raise ValueError("La factura debe contener al menos una línea de detalle")

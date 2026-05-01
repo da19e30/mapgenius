@@ -11,7 +11,7 @@ from app.database import get_db
 from app.models.client import Client
 from app.models.user import User
 from app.services.auth import get_current_user
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 router = APIRouter(prefix="/clients", tags=["clients"])
 
@@ -30,8 +30,7 @@ class ClientRead(BaseModel):
     address: str | None = None
     tax_regime: str
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 @router.post("/", response_model=ClientRead, status_code=status.HTTP_201_CREATED)
 def create_client(client: ClientCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
@@ -39,7 +38,7 @@ def create_client(client: ClientCreate, db: Session = Depends(get_db), current_u
     existing = db.query(Client).filter(Client.nit == client.nit).first()
     if existing:
         raise HTTPException(status_code=400, detail="NIT ya registrado")
-    db_client = Client(**client.dict())
+    db_client = Client(**client.model_dump())
     db.add(db_client)
     db.commit()
     db.refresh(db_client)
@@ -62,7 +61,7 @@ def update_client(client_id: int, client_in: ClientCreate, db: Session = Depends
     client = db.query(Client).filter(Client.id == client_id).first()
     if not client:
         raise HTTPException(status_code=404, detail="Cliente no encontrado")
-    for field, value in client_in.dict().items():
+    for field, value in client_in.model_dump().items():
         setattr(client, field, value)
     db.commit()
     db.refresh(client)

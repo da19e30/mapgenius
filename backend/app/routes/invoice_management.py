@@ -14,7 +14,7 @@ from app.models.client import Client
 from app.models.product import Product
 from app.models.user import User
 from app.services.auth import get_current_user
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, ConfigDict, field_validator
 
 router = APIRouter(prefix="/invoices", tags=["invoices"])
 
@@ -24,7 +24,7 @@ class LineItem(BaseModel):
     unit_price: float | None = None  # opcional; si no se envía se usa price del producto
     iva_percent: float | None = None
 
-    @validator("quantity")
+    @field_validator("quantity")
     def qty_positive(cls, v):
         if v <= 0:
             raise ValueError("La cantidad debe ser mayor que 0")
@@ -34,7 +34,7 @@ class InvoiceCreate(BaseModel):
     client_id: int
     line_items: List[LineItem]
 
-    @validator("line_items")
+    @field_validator("line_items")
     def at_least_one(cls, v):
         if not v:
             raise ValueError("Debe haber al menos una línea de detalle")
@@ -52,8 +52,7 @@ class InvoiceRead(BaseModel):
     client: dict
     lines: List[dict]
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 @router.post("/", response_model=InvoiceRead, status_code=status.HTTP_201_CREATED)
 def create_invoice(payload: InvoiceCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):

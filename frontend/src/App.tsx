@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
+import HealthCheck from '@/pages/HealthCheck';
 import Layout from '@/components/Layout';
 import Login from '@/pages/Login';
 import Register from '@/pages/Register';
@@ -38,6 +39,7 @@ export default function App() {
         <Routes>
       {/* Public routes */}
       <Route path="/" element={<Landing />} />
+          <Route path="/health" element={<HealthCheck />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/product" element={<Product />} />

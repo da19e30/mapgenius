@@ -23,6 +23,17 @@ def generate_xml(data: Dict) -> bytes:
     etree.SubElement(root, "Receiver").text = data.get("receiver", "UNKNOWN")
     return etree.tostring(root, pretty_print=True, xml_declaration=True, encoding="UTF-8")
 
+def validate_xml(xml_blob: bytes) -> None:
+    """Validate that *xml_blob* is well‑formed XML.
+
+    Raises ``ValueError`` if the document cannot be parsed.
+    """
+    try:
+        etree.fromstring(xml_blob)
+    except etree.XMLSyntaxError as exc:
+        raise ValueError(f"XML syntax error: {exc}")
+
+
 def send_to_authority(xml_blob: bytes, country: str) -> Dict:
     """Placeholder for real SOAP/REST call to DIAN (CO) or SAT (MX).
 

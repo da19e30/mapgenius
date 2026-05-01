@@ -115,20 +115,3 @@ export default function ProductPage() {
   );
 }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-800 p-8">
-      <div className="max-w-4xl mx-auto text-white">
-        <h1 className="text-4xl font-extrabold mb-6">Producto</h1>
-        <p className="text-slate-300 mb-4">Descubre todas las funcionalidades de Mapgenius Solutions.</p>
-        <div className="grid md:grid-cols-3 gap-6 mt-8">
-          {['OCR Inteligente', 'Clasificación IA', 'Análisis Financiero'].map((f) => (
-            <div key={f} className="bg-white/10 p-6 rounded-xl backdrop-blur-sm">
-              <h3 className="text-xl font-semibold mb-2">{f}</h3>
-              <p className="text-slate-400 text-sm">Automatización y precisión en el procesamiento de facturas.</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}

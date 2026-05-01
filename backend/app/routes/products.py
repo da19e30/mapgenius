@@ -11,7 +11,7 @@ from app.database import get_db
 from app.models.product import Product
 from app.models.user import User
 from app.services.auth import get_current_user
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 router = APIRouter(prefix="/products", tags=["products"])
 
@@ -32,15 +32,14 @@ class ProductRead(BaseModel):
     dian_class: str | None = None
     unit: str
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 @router.post("/", response_model=ProductRead, status_code=status.HTTP_201_CREATED)
 def create_product(product: ProductCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     # Verifica código único
     if db.query(Product).filter(Product.code == product.code).first():
         raise HTTPException(status_code=400, detail="Código de producto ya registrado")
-    db_product = Product(**product.dict())
+    db_product = Product(**product.model_dump())
     db.add(db_product)
     db.commit()
     db.refresh(db_product)
@@ -63,7 +62,7 @@ def update_product(product_id: int, product_in: ProductCreate, db: Session = Dep
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:
         raise HTTPException(status_code=404, detail="Producto no encontrado")
-    for field, value in product_in.dict().items():
+    for field, value in product_in.model_dump().items():
         setattr(product, field, value)
     db.commit()
     db.refresh(product)

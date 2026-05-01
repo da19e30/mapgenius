@@ -4,20 +4,20 @@ All secrets must be stored in environment variables; .env is for local developme
 """
 
 from pydantic_settings import BaseSettings
-from pydantic import Field, PostgresDsn, SecretStr
+from pydantic import SecretStr
 
 class Settings(BaseSettings):
     APP_NAME: str = "MapGenius SaaS"
     DEBUG: bool = False
 
     # JWT settings
-    JWT_SECRET_KEY: SecretStr = Field(..., env="JWT_SECRET_KEY")
+    JWT_SECRET_KEY: SecretStr
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
-    # Database URL (Postgres)
-    DATABASE_URL: PostgresDsn = Field(..., env="DATABASE_URL")
+    # Database URL – supports sqlite or postgres
+    DATABASE_URL: str
 
     # Email (SMTP) – optional for dev
     SMTP_HOST: str = "localhost"
@@ -29,5 +29,6 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
+        extra = "ignore"
 
 settings = Settings()
