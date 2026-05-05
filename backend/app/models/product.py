@@ -3,7 +3,7 @@
 Define la tabla `products` con la información requerida por la DIAN para la clasificación de ítems.
 '''
 
-from sqlalchemy import Column, Integer, String, Float, Text
+from sqlalchemy import Column, Integer, String, Float, Text, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database import Base
 
@@ -22,6 +22,7 @@ class Product(Base):
     __tablename__ = "products"
 
     id = Column(Integer, primary_key=True, index=True)
+    tenant_id = Column(Integer, ForeignKey("tenants.id"), nullable=True, index=True)
     code = Column(String(50), unique=True, nullable=False, index=True)
     name = Column(String(255), nullable=False)
     price = Column(Float, nullable=False)
@@ -30,6 +31,7 @@ class Product(Base):
     unit = Column(String(20), nullable=False, default="unidad")
 
     # Relaciones
+    tenant = relationship("Tenant", back_populates="products")
     line_items = relationship("InvoiceLine", back_populates="product")
 
     def __repr__(self):

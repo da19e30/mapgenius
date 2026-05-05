@@ -18,13 +18,13 @@ from app.models.invoice_header import InvoiceHeader
 from app.models.invoice_line import InvoiceLine
 from app.models.client import Client
 from app.models.product import Product
+from sqlalchemy.orm import joinedload
 from app.utils.xml_utils import generate_invoice_xml, compute_cufe
 from app.utils.signature import sign_xml
 from app.services.dian_client import send_to_dian_simulation
 from app.services.email import send_invoice_email
 from app.services.pdf_generator import render_invoice_pdf
 from app.ai.invoice_validator import validate_invoice_payload
-from app.database import SessionLocal
 
 # Directory where generated artefacts are stored (XML, signed XML, PDF, QR)
 BASE_OUTPUT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "generated"))
@@ -52,10 +52,7 @@ def _collect_line_data(lines: List[InvoiceLine]) -> List[Dict]:
     result = []
     for line in lines:
         # Ensure product relationship is loaded
-        if not hasattr(line, "product"):
-            db = SessionLocal()
-            line.product = db.query(Product).filter(Product.id == line.product_id).first()
-            db.close()
+        # Product should already be loaded via joinedload; fallback not needed
         result.append({
             "product_code": line.product.code if line.product else "",
             "product_name": line.product.name if line.product else "",
@@ -86,7 +83,7 @@ def generate_and_finalize_invoice(db_session, header_id: int, raw_payload: dict 
     if not header:
         raise ValueError(f"InvoiceHeader {header_id} not found")
     client: Client = db_session.query(Client).filter(Client.id == header.client_id).first()
-    lines: List[InvoiceLine] = db_session.query(InvoiceLine).filter(InvoiceLine.invoice_id == header.id).all()
+    lines: List[InvoiceLine] = db_session.query(InvoiceLine).options(joinedload(InvoiceLine.product)).filter(InvoiceLine.invoice_id == header.id).all()
 
     # ---- AI validation (if payload supplied) ----
     if raw_payload is not None:
@@ -119,7 +116,7 @@ def generate_and_finalize_invoice(db_session, header_id: int, raw_payload: dict 
     db_session.commit()
 
     # ---- Simulate DIAN submission ----
-    dian_response = send_to_dian_simulation(signed_path)
+    dian_response = send_to_dian_simulation(signed_path, db_session)
     header.status = dian_response["status"]
     db_session.add(header)
     db_session.commit()

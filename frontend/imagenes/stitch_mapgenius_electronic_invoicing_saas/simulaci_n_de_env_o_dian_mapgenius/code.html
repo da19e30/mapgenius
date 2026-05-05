@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#131b2e",
+                        "primary-fixed": "#dae2fd",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#7c839b",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1b1b1d",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "outline": "#76777d",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-tertiary-container": "#98805d",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#45464d",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-secondary-container": "#54647a",
+                        "tertiary": "#000000",
+                        "surface-container-highest": "#e4e2e4",
+                        "surface-container-high": "#eae7e9",
+                        "on-surface": "#1b1b1d",
+                        "on-tertiary-fixed": "#271901",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "surface-container": "#f0edef",
+                        "secondary-fixed": "#d3e4fe",
+                        "inverse-on-surface": "#f3f0f2",
+                        "surface-tint": "#565e74",
+                        "surface-variant": "#e4e2e4",
+                        "primary": "#000000",
+                        "tertiary-fixed": "#fcdeb5",
+                        "surface-bright": "#fcf8fa",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dcd9db",
+                        "outline-variant": "#c6c6cd",
+                        "surface": "#fcf8fa",
+                        "tertiary-container": "#271901",
+                        "secondary": "#505f76",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#d0e1fb",
+                        "background": "#fcf8fa",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#131b2e",
+                        "inverse-surface": "#303032"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "2xl": "48px",
+                        "xl": "32px",
+                        "gutter": "24px",
+                        "3xl": "64px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Inter"],
+                        "mono-data": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h2": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .xml-syntax .tag { color: #1e40af; }
+        .xml-syntax .attr { color: #7c3aed; }
+        .xml-syntax .val { color: #059669; }
+        .xml-syntax .content { color: #1f2937; }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background antialiased">
+<!-- TopAppBar Shell -->
+<header class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-['Inter'] text-sm antialiased font-medium docked full-width top-0 sticky border-b border-slate-200 dark:border-slate-800 shadow-sm flex justify-between items-center w-full px-6 h-16 z-50">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Mapgenius</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer active:opacity-80" href="#">Tablero</a>
+<a class="text-emerald-600 dark:text-emerald-400 font-semibold border-b-2 border-emerald-600 transition-colors cursor-pointer active:opacity-80" href="#">Facturación</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer active:opacity-80" href="#">Reportes</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer text-slate-500" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer text-slate-500" data-icon="help">help</span>
+<div class="flex items-center gap-2 cursor-pointer">
+<span class="material-symbols-outlined text-slate-900" data-icon="account_circle">account_circle</span>
+<span class="hidden sm:inline">Admin Mapgenius</span>
+</div>
+</div>
+</header>
+<div class="flex min-h-[calc(100vh-64px)]">
+<!-- SideNavBar Shell -->
+<aside class="bg-slate-900 dark:bg-slate-950 text-white font-['Inter'] text-[13px] tracking-wide fixed left-0 top-16 h-[calc(100vh-64px)] w-64 border-r border-slate-800 shadow-2xl flex flex-col p-4 space-y-2 z-40 hidden lg:flex">
+<div class="px-4 py-6 mb-4">
+<p class="text-2xl font-black text-white tracking-tighter">Mapgenius</p>
+<p class="text-slate-400 text-xs mt-1">SaaS Contable</p>
+</div>
+<a class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span> Tablero
+            </a>
+<a class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span> Clientes
+            </a>
+<a class="bg-emerald-600 text-white rounded-md flex items-center gap-3 px-4 py-2.5 shadow-lg shadow-emerald-900/40 transition-transform scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span> Facturación
+            </a>
+<a class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span> Productos
+            </a>
+<a class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span> Gastos
+            </a>
+<a class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span> Reportes
+            </a>
+<div class="mt-auto pt-6 border-t border-slate-800 space-y-2">
+<a class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span> Soporte
+                </a>
+<a class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span> Ajustes
+                </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 lg:ml-64 p-6 md:p-10 max-w-7xl mx-auto w-full">
+<!-- Breadcrumbs & Header -->
+<div class="mb-8">
+<nav class="flex items-center gap-2 text-on-primary-container text-label-md mb-2">
+<span>Facturación</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-secondary">Simulaciones</span>
+</nav>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<h1 class="font-h1 text-h1 text-on-background">Simulación de Integración DIAN</h1>
+<div class="flex gap-3">
+<button class="bg-white border border-outline-variant px-4 py-2 rounded-lg text-body-sm font-medium hover:bg-surface-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="refresh">refresh</span>
+                            Reiniciar Proceso
+                        </button>
+<button class="bg-emerald-600 text-white px-4 py-2 rounded-lg text-body-sm font-medium hover:bg-emerald-700 transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="play_arrow">play_arrow</span>
+                            Ejecutar Simulación
+                        </button>
+</div>
+</div>
+</div>
+<!-- Step Progress Indicator -->
+<div class="mb-10 grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="flex items-center gap-3 p-4 bg-white border border-emerald-100 rounded-xl shadow-sm">
+<div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-label-md">1</div>
+<div>
+<p class="text-body-sm font-semibold">XML Generation</p>
+<p class="text-[11px] text-on-primary-container">UBL 2.1 Standard</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-emerald-600" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center gap-3 p-4 bg-white border border-emerald-100 rounded-xl shadow-sm">
+<div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-label-md">2</div>
+<div>
+<p class="text-body-sm font-semibold">Digital Signature</p>
+<p class="text-[11px] text-on-primary-container">XAdES-EPES Policy</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-emerald-600" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center gap-3 p-4 bg-white border border-emerald-100 rounded-xl shadow-sm">
+<div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-label-md">3</div>
+<div>
+<p class="text-body-sm font-semibold">Transmission</p>
+<p class="text-[11px] text-on-primary-container">SOAP WS Endpoint</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-emerald-600" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center gap-3 p-4 bg-white border border-emerald-500 rounded-xl shadow-md ring-2 ring-emerald-50/50">
+<div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-label-md animate-pulse">4</div>
+<div>
+<p class="text-body-sm font-semibold">Response</p>
+<p class="text-[11px] text-on-primary-container">DIAN Validation</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-emerald-600" data-icon="sync">sync</span>
+</div>
+</div>
+<!-- Main Interactive Area: Technical Viewer + Status Panel -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left: Technical Viewer Area -->
+<div class="lg:col-span-8 space-y-6">
+<!-- XML Viewer -->
+<div class="bg-primary-container rounded-xl overflow-hidden shadow-xl border border-slate-800">
+<div class="bg-slate-800/50 px-4 py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-400 text-[18px]" data-icon="code">code</span>
+<span class="text-slate-300 font-mono-data text-label-md uppercase tracking-wider">UBL 2.1 Invoice Payload</span>
+</div>
+<span class="text-slate-500 text-[11px] font-mono-data">invoice_99000123.xml</span>
+</div>
+<div class="p-6 overflow-x-auto">
+<pre class="font-mono-data text-body-sm leading-relaxed xml-syntax whitespace-pre"><code class="text-slate-300">&lt;<span class="tag">Invoice</span> <span class="attr">xmlns</span>=<span class="val">"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"</span>&gt;
+  &lt;<span class="tag">cbc:CustomizationID</span>&gt;<span class="content">10</span>&lt;/<span class="tag">cbc:CustomizationID</span>&gt;
+  &lt;<span class="tag">cbc:ProfileID</span>&gt;<span class="content">DIAN 2.1</span>&lt;/<span class="tag">cbc:ProfileID</span>&gt;
+  &lt;<span class="tag">cbc:ID</span>&gt;<span class="content">SETT99000123</span>&lt;/<span class="tag">cbc:ID</span>&gt;
+  &lt;<span class="tag">cbc:IssueDate</span>&gt;<span class="content">2023-11-24</span>&lt;/<span class="tag">cbc:IssueDate</span>&gt;
+  &lt;<span class="tag">cac:AccountingSupplierParty</span>&gt;
+    &lt;<span class="tag">cac:Party</span>&gt;
+      &lt;<span class="tag">cac:PartyTaxScheme</span>&gt;
+        &lt;<span class="tag">cbc:RegistrationName</span>&gt;<span class="content">Mapgenius Solutions SAS</span>&lt;/<span class="tag">cbc:RegistrationName</span>&gt;
+        &lt;<span class="tag">cbc:CompanyID</span> <span class="attr">schemeID</span>=<span class="val">"4"</span>&gt;<span class="content">901234567</span>&lt;/<span class="tag">cbc:CompanyID</span>&gt;
+      &lt;/<span class="tag">cac:PartyTaxScheme</span>&gt;
+    &lt;/<span class="tag">cac:Party</span>&gt;
+  &lt;/<span class="tag">cac:AccountingSupplierParty</span>&gt;
+  &lt;<span class="tag">cac:AccountingCustomerParty</span>&gt;
+    &lt;<span class="tag">cac:Party</span>&gt;
+      &lt;<span class="tag">cbc:RegistrationName</span>&gt;<span class="content">TechGlobal Corp</span>&lt;/<span class="tag">cbc:RegistrationName</span>&gt;
+    &lt;/<span class="tag">cac:Party</span>&gt;
+  &lt;/<span class="tag">cac:AccountingCustomerParty</span>&gt;
+&lt;/<span class="tag">Invoice</span>&gt;</code></pre>
+</div>
+</div>
+<!-- API Response Log -->
+<div class="bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<div class="px-4 py-3 border-b border-outline-variant flex items-center justify-between">
+<span class="text-body-sm font-bold text-on-background">Response Log (DIAN API)</span>
+<span class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded text-[10px] font-bold">HTTP 200 OK</span>
+</div>
+<div class="p-4 bg-surface-container-low font-mono-data text-[13px] text-secondary">
+<div class="flex gap-4 border-b border-outline-variant/30 pb-2 mb-2">
+<span class="text-on-primary-container shrink-0">14:22:01</span>
+<span class="text-on-background">[INFO] POST /vp/recepcion/invoice.wsdl started.</span>
+</div>
+<div class="flex gap-4 border-b border-outline-variant/30 pb-2 mb-2">
+<span class="text-on-primary-container shrink-0">14:22:03</span>
+<span class="text-emerald-600 font-bold">[SUCCESS] Payload validated against XSD.</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-primary-container shrink-0">14:22:04</span>
+<pre class="text-on-background whitespace-pre-wrap">{
+  "statusCode": "200",
+  "statusMessage": "Processed",
+  "cufe": "5f6e8a9b2c1d0e4f8a9b2c1d0e4f5f6e8a9b2c1d0e4f8a9b2c1d0e4f5f6e8a9b2c",
+  "validationResults": []
+}</pre>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Status Panel -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Final Status Card -->
+<div class="bg-white rounded-xl border border-outline-variant shadow-md p-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-[80px]" data-icon="verified">verified</span>
+</div>
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="text-label-md text-on-primary-container uppercase tracking-widest">Estado Final</p>
+<p class="text-h2 text-emerald-600 font-bold">ACEPTADA</p>
+</div>
+</div>
+<div class="space-y-4 mb-8">
+<div>
+<p class="text-label-md text-on-primary-container mb-1 uppercase tracking-wider">CUFE Hash</p>
+<div class="bg-surface-container p-3 rounded border border-outline-variant/50 break-all font-mono-data text-xs text-secondary leading-tight">
+                                    5f6e8a9b2c1d0e4f8a9b2c1d0e4f5f6e8a9b2c1d0e4f8a9b2c1d0e4f5f6e8a9b2c
+                                </div>
+</div>
+<div class="flex justify-center p-4 bg-white border border-outline-variant rounded-lg">
+<img alt="QR Code DIAN" class="w-32 h-32 object-contain" data-alt="A high-contrast QR code rendered on a minimalist white background, specifically designed for a financial interface. The QR code is sharp and precise, surrounded by clean margins and a subtle light gray border. The lighting is uniform and soft, reflecting a professional SaaS environment's clarity and modern aesthetic. The overall mood is technological and functional, emphasizing data security and institutional reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAImdjDLANq7JJBvxjy8smczRmS2mxpwI90_FO-RAGglUOpuDVG7uJLusN2cZOhYyoGEs3CN9VLC6fuk4oc0OLCJ53xS8oVZt7YBifIrdE1cZ7LOGqrF3wM88Yu7nI-Q0PbEuxHTm_XbcLsDLX-tlod2wfqZPsZWrPudpkjOzgOisStK5NAJ0lz1lbeH207yaXMjqyUScc9TImqFrZREAgGN1nvqzFZzpFAHVN123tuxncDRuGZ0PAxLBxWX0N-22OSXVKU-crTLhw"/>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-2">
+<button class="w-full bg-primary-container text-white py-3 rounded-lg font-medium text-body-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                                Descargar XML
+                            </button>
+<button class="w-full bg-white border border-outline-variant py-3 rounded-lg font-medium text-body-sm flex items-center justify-center gap-2 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="picture_as_pdf">picture_as_pdf</span>
+                                Ver PDF Representativo
+                            </button>
+<button class="w-full bg-white border border-outline-variant py-3 rounded-lg font-medium text-body-sm flex items-center justify-center gap-2 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+                                Enviar por Email
+                            </button>
+</div>
+</div>
+<!-- Additional Details Card -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant p-5">
+<h4 class="text-body-sm font-bold text-on-background mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="info">info</span>
+                            Información de Firma
+                        </h4>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-primary-container">Certificado:</span>
+<span class="font-medium text-on-background">GSE v3 (Validez 2025)</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-primary-container">Algoritmo:</span>
+<span class="font-medium text-on-background">SHA-256 with RSA</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-primary-container">Politica:</span>
+<span class="font-medium text-on-background">DIAN-V2.1-EPES</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 h-16 flex items-center justify-around px-4 z-50">
+<div class="flex flex-col items-center text-emerald-600">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] mt-0.5">Inicio</span>
+</div>
+<div class="flex flex-col items-center text-slate-400">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-[10px] mt-0.5">Facturas</span>
+</div>
+<div class="flex flex-col items-center text-slate-400">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] mt-0.5">Clientes</span>
+</div>
+<div class="flex flex-col items-center text-slate-400">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] mt-0.5">Ajustes</span>
+</div>
+</nav>
+</body></html>

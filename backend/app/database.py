@@ -11,7 +11,8 @@ from typing import Any
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine
 from sqlalchemy.exc import OperationalError
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker
+from app.db.base import Base
 
 # ---------------------------------------------------------------------------
 # Engine configuration
@@ -42,8 +43,6 @@ engine: Engine = create_engine(
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-Base = declarative_base()
 
 # ---------------------------------------------------------------------------
 # Helper functions

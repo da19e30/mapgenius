@@ -16,22 +16,19 @@ from jose import JWTError, jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
-from passlib.context import CryptContext
+import bcrypt
 from app.database import get_db
 from app.models.user import User
 from app.core.security import decode_without_verify
 from app.crud.revoked_token import is_revoked
 
-# Contexto de hash para contraseñas
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
 def hash_password(password: str) -> str:
     """Genera un hash seguro de la contraseña usando bcrypt."""
-    return pwd_context.hash(password)
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verifica una contraseña contra su hash almacenado."""
-    return pwd_context.verify(plain_password, hashed_password)
+    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
 
 # Configuración desde variables de entorno
 SECRET_KEY = os.getenv("SECRET_KEY", "supersecretkey1234567890")

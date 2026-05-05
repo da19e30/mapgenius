@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Asistente de IA - Mapgenius Solutions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#574425",
+                      "on-tertiary-container": "#98805d",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "primary": "#000000",
+                      "outline": "#76777d",
+                      "tertiary": "#000000",
+                      "primary-fixed-dim": "#bec6e0",
+                      "surface-container-low": "#f6f3f5",
+                      "on-primary-container": "#7c839b",
+                      "on-primary": "#ffffff",
+                      "surface-dim": "#dcd9db",
+                      "inverse-primary": "#bec6e0",
+                      "surface-container-highest": "#e4e2e4",
+                      "on-tertiary-fixed": "#271901",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "inverse-on-surface": "#f3f0f2",
+                      "error": "#ba1a1a",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed": "#fcdeb5",
+                      "secondary-fixed": "#d3e4fe",
+                      "on-secondary-fixed": "#0b1c30",
+                      "background": "#fcf8fa",
+                      "tertiary-fixed-dim": "#dec29a",
+                      "on-primary-fixed": "#131b2e",
+                      "inverse-surface": "#303032",
+                      "on-secondary-container": "#54647a",
+                      "surface-bright": "#fcf8fa",
+                      "error-container": "#ffdad6",
+                      "outline-variant": "#c6c6cd",
+                      "secondary": "#505f76",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "on-background": "#1b1b1d",
+                      "on-error-container": "#93000a",
+                      "surface-container-high": "#eae7e9",
+                      "tertiary-container": "#271901",
+                      "primary-fixed": "#dae2fd",
+                      "surface-container": "#f0edef",
+                      "on-tertiary": "#ffffff",
+                      "on-surface": "#1b1b1d",
+                      "on-error": "#ffffff",
+                      "secondary-container": "#d0e1fb",
+                      "surface-tint": "#565e74",
+                      "primary-container": "#131b2e",
+                      "surface-variant": "#e4e2e4",
+                      "surface-container-lowest": "#ffffff",
+                      "on-surface-variant": "#45464d",
+                      "surface": "#fcf8fa"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "3xl": "64px",
+                      "xl": "32px",
+                      "gutter": "24px",
+                      "sm": "8px",
+                      "base": "4px",
+                      "md": "16px",
+                      "2xl": "48px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "h3": ["Inter"],
+                      "h2": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "mono-data": ["Inter"],
+                      "h1": ["Inter"],
+                      "body-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+        .chat-bubble-ai { border-bottom-left-radius: 2px; }
+        .chat-bubble-user { border-bottom-right-radius: 2px; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary-container">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="hidden md:flex flex-col h-full py-6 px-4 gap-2 bg-slate-50 dark:bg-slate-950 w-64 border-r border-slate-200 dark:border-slate-800 transition-all duration-200 ease-in-out">
+<div class="px-2 mb-8">
+<h1 class="text-xl font-black text-slate-900 dark:text-slate-100 uppercase tracking-tighter">Mapgenius</h1>
+<p class="text-[10px] text-slate-500 font-bold tracking-widest uppercase">Institutional Grade AI</p>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-900/50 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 shadow-sm border-l-4 border-emerald-600 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="chat_spark" style="font-variation-settings: 'FILL' 1;">chat_spark</span>
+<span class="font-medium">AI Assistant</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-900/50 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-medium">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-900/50 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span class="font-medium">Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-900/50 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 space-y-1">
+<button class="w-full flex items-center justify-center gap-2 py-2 px-4 bg-emerald-600 text-white rounded-lg font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-600/20">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                    New Analysis
+                </button>
+<div class="h-4"></div>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-medium">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-medium">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Chat Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-white dark:bg-slate-900 relative">
+<!-- Header -->
+<header class="h-16 flex items-center justify-between px-6 border-b border-slate-200 dark:border-slate-800 z-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white dark:border-slate-900 rounded-full"></div>
+</div>
+<div>
+<h2 class="font-h3 text-slate-900 dark:text-slate-50">Asistente de IA Mapgenius</h2>
+<div class="flex items-center gap-1.5">
+<span class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">En línea</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden sm:flex items-center bg-slate-100 dark:bg-slate-800 rounded-full p-1 border border-slate-200 dark:border-slate-700">
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm transition-all">Financiero</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold text-slate-500 hover:text-slate-700 transition-all">Fiscal</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold text-slate-500 hover:text-slate-700 transition-all">General</button>
+</div>
+<button class="p-2 text-slate-400 hover:text-slate-600 transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Conversation Flow -->
+<div class="flex-1 overflow-y-auto p-6 space-y-8">
+<!-- AI Message -->
+<div class="flex gap-4 max-w-4xl">
+<div class="w-8 h-8 rounded-full bg-emerald-100 flex-shrink-0 flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined text-sm" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="space-y-4 flex-1">
+<div class="chat-bubble-ai bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 text-slate-800 dark:text-slate-200 shadow-sm inline-block">
+<p class="font-body-md">Hola, analicé tus facturas de este mes. He detectado un ahorro potencial de <span class="font-bold text-emerald-600">$1.2M</span> en IVA no reclamado en la categoría de servicios profesionales externos.</p>
+</div>
+<!-- AI Insight Component (Bento Widget) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 shadow-sm">
+<h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Desglose de Ahorro</h4>
+<div class="flex items-end gap-1 mb-4">
+<span class="text-2xl font-h2 text-slate-900 dark:text-white">$1,240,500</span>
+<span class="text-xs text-emerald-600 font-bold mb-1">+12.4% vs Mes Anterior</span>
+</div>
+<div class="space-y-2">
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[65%]"></div>
+</div>
+<div class="flex justify-between text-[10px] font-bold text-slate-500">
+<span>RECLAMABLE</span>
+<span>$1,240,500</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 shadow-sm flex flex-col justify-center">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-400 uppercase tracking-tight">Estado de Validación</p>
+<p class="text-sm font-semibold text-slate-900 dark:text-white">Cumplimiento del 98%</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-4 max-w-4xl ml-auto flex-row-reverse">
+<div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="person">person</span>
+</div>
+<div class="chat-bubble-user bg-emerald-600 text-white p-4 rounded-2xl shadow-md inline-block">
+<p class="font-body-md">¿Cómo se compara esto con el flujo de caja proyectado para el Q3? Muéstrame una tabla comparativa.</p>
+</div>
+</div>
+<!-- AI Data Table Message -->
+<div class="flex gap-4 max-w-4xl">
+<div class="w-8 h-8 rounded-full bg-emerald-100 flex-shrink-0 flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined text-sm" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="space-y-4 flex-1">
+<div class="chat-bubble-ai bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 text-slate-800 dark:text-slate-200 shadow-sm">
+<p class="font-body-md">Aquí tienes la comparativa detallada. El ahorro detectado mejora tu liquidez proyectada en un 4.5% para el inicio del Q3.</p>
+</div>
+<div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
+<th class="px-4 py-3 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Periodo</th>
+<th class="px-4 py-3 text-[10px] font-bold text-slate-500 uppercase tracking-widest text-right">Proyección Original</th>
+<th class="px-4 py-3 text-[10px] font-bold text-slate-500 uppercase tracking-widest text-right">Proyección Optimizada</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<td class="px-4 py-3 font-semibold text-sm">Julio 2024</td>
+<td class="px-4 py-3 text-right font-mono-data text-slate-600 dark:text-slate-400">$18.4M</td>
+<td class="px-4 py-3 text-right font-mono-data text-emerald-600 font-bold">$19.2M</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<td class="px-4 py-3 font-semibold text-sm">Agosto 2024</td>
+<td class="px-4 py-3 text-right font-mono-data text-slate-600 dark:text-slate-400">$20.1M</td>
+<td class="px-4 py-3 text-right font-mono-data text-emerald-600 font-bold">$21.3M</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<td class="px-4 py-3 font-semibold text-sm">Septiembre 2024</td>
+<td class="px-4 py-3 text-right font-mono-data text-slate-600 dark:text-slate-400">$19.8M</td>
+<td class="px-4 py-3 text-right font-mono-data text-emerald-600 font-bold">$21.0M</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<footer class="p-6 bg-gradient-to-t from-white via-white/90 to-transparent dark:from-slate-900 dark:via-slate-900/90">
+<div class="max-w-4xl mx-auto space-y-4">
+<!-- Quick Suggestions -->
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300 hover:border-emerald-600 hover:text-emerald-600 transition-all shadow-sm">
+                            ¿Cuál es mi flujo de caja?
+                        </button>
+<button class="px-4 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300 hover:border-emerald-600 hover:text-emerald-600 transition-all shadow-sm">
+                            Analizar última factura
+                        </button>
+<button class="px-4 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300 hover:border-emerald-600 hover:text-emerald-600 transition-all shadow-sm">
+                            Resumen de impuestos
+                        </button>
+</div>
+<!-- Input Box -->
+<div class="relative group">
+<div class="absolute inset-0 bg-emerald-600/5 blur-xl group-focus-within:bg-emerald-600/10 transition-all rounded-2xl"></div>
+<div class="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-2 shadow-xl focus-within:border-emerald-500/50 transition-all">
+<textarea class="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white placeholder-slate-400 font-body-lg resize-none px-4 py-2" placeholder="Escribe tu consulta financiera o fiscal..." rows="1"></textarea>
+<div class="flex items-center justify-between mt-2 px-2 pb-1">
+<div class="flex items-center gap-1">
+<button class="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all" title="Adjuntar archivos">
+<span class="material-symbols-outlined" data-icon="attach_file">attach_file</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all" title="Notas de voz">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all" title="Imágenes">
+<span class="material-symbols-outlined" data-icon="image">image</span>
+</button>
+</div>
+<button class="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2 rounded-xl font-bold text-sm hover:bg-emerald-700 active:scale-95 transition-all shadow-lg shadow-emerald-600/30">
+<span>Enviar</span>
+<span class="material-symbols-outlined text-sm" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+<p class="text-center text-[10px] text-slate-400 font-medium">La IA de Mapgenius puede cometer errores. Verifica la información crítica con tu asesor fiscal.</p>
+</div>
+</footer>
+</main>
+<!-- Right Side Panel (Context) -->
+<aside class="hidden lg:flex flex-col w-80 border-l border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-y-auto">
+<div class="p-6">
+<h3 class="font-h3 text-slate-900 dark:text-slate-50 mb-6 flex items-center justify-between">
+                    Contexto del Chat
+                    <span class="material-symbols-outlined text-slate-400 text-sm" data-icon="info">info</span>
+</h3>
+<div class="space-y-6">
+<!-- Analyzed Docs -->
+<div>
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Documentos Analizados</p>
+<div class="space-y-2">
+<div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700">
+<div class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center text-red-600">
+<span class="material-symbols-outlined text-sm" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-semibold text-slate-900 dark:text-white truncate">Facturas_Mayo_2024.pdf</p>
+<p class="text-[10px] text-slate-500">2.4 MB • Hace 5 min</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700">
+<div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined text-sm" data-icon="data_object">data_object</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-semibold text-slate-900 dark:text-white truncate">Nomina_Global_Q2.xml</p>
+<p class="text-[10px] text-slate-500">18 KB • Hace 10 min</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Summary Card -->
+<div class="bg-emerald-600 rounded-2xl p-4 text-white shadow-xl shadow-emerald-600/20 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+<h4 class="text-xs font-bold uppercase tracking-wider opacity-80 mb-4">Resumen de Análisis</h4>
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<span class="text-xs opacity-80">IVA Reclamable</span>
+<span class="text-sm font-bold">$1.2M</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs opacity-80">Riesgo Fiscal</span>
+<span class="text-xs font-bold px-2 py-0.5 bg-white/20 rounded-full">Bajo</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs opacity-80">Efectividad</span>
+<span class="text-sm font-bold">94%</span>
+</div>
+</div>
+<button class="w-full mt-4 py-2 bg-white text-emerald-700 rounded-xl font-bold text-xs hover:bg-emerald-50 transition-colors">
+                            Generar Reporte PDF
+                        </button>
+</div>
+<!-- Image Prompt Example for illustrative purposes (As requested in rules) -->
+<div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800">
+<img alt="Financial Dashboard Preview" class="w-full h-32 object-cover" data-alt="A clean, high-resolution photographic view of a minimalist office workspace with a high-end computer screen displaying complex financial data visualizations. The lighting is soft and natural, coming from a large window during the golden hour, creating a calm and professional atmosphere. The color palette is dominated by corporate blues, slate grays, and crisp whites, emphasizing clarity and order. This professional setting represents the institutional-grade environment where Mapgenius Solutions is utilized for strategic decision-making." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUz63QXbNcZSu-CIORUR62pxJkZTaaqH9Bxrj3S28F6wnBPrGKbCFea-nfAH4acvTQiELsxudm1GpoKZi8M8plKzd-xNxPXw_i9Z0KorOmpUDPwqJB-qy7ZRCpn1gfE3y-EBtDnV89NsanwRlA1cKlGqVgKLghrhJGFoUMxDbhmsqQH7gIxA7uM6BTSDb2RJ6cTOzKGA4mbpddo0WzHBTBGDVJ-P2orkvb_dfzxLzDJfa2y_Sv99dP6Wrwbp4kTezJS-whFuJAqv4"/>
+<div class="p-3">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Centro de Control</p>
+<p class="text-xs text-slate-600 dark:text-slate-400">Panel de visualización avanzada para directivos.</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</body></html>

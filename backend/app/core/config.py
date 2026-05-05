@@ -3,7 +3,7 @@
 All secrets must be stored in environment variables; .env is for local development only.
 """
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import SecretStr
 
 class Settings(BaseSettings):
@@ -26,9 +26,10 @@ class Settings(BaseSettings):
     SMTP_PASSWORD: SecretStr | None = None
     EMAIL_FROM: str = "no-reply@mapgenius.com"
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        extra = "ignore"
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+    )
 
 settings = Settings()

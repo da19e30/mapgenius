@@ -20,10 +20,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.database import Base, get_db
+from app.models.user import User
 from app.models.client import Client
 from app.models.product import Product
 from app.models.invoice_header import InvoiceHeader
 from app.models.invoice_line import InvoiceLine
+from app.models.dian_log import DianLog
 from app.services.invoice import generate_and_finalize_invoice
 
 # ---------------------------------------------------------------------------
@@ -34,7 +36,7 @@ from app.services.invoice import generate_and_finalize_invoice
 def db_session():
     # Use an in‑memory SQLite DB for isolation
     engine = create_engine("sqlite:///:memory:")
-    TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine, expire_on_commit=False)
     Base.metadata.create_all(bind=engine)
     session = TestingSessionLocal()
     yield session
@@ -86,7 +88,7 @@ def create_invoice_entities(db_session, client, product):
     db_session.add(line)
     db_session.commit()
     db_session.refresh(header)
-    return header.id, {"client_id": client.id, "line_items": [{"product_id": product.id, "quantity": 1}]}
+    return header.id, {"client_id": client.id, "line_items": [{"product_id": product.id, "quantity": 1, "unit_price": product.price, "iva_percent": product.iva_percent}]}
 
 # ---------------------------------------------------------------------------
 # Tests
@@ -95,7 +97,8 @@ def create_invoice_entities(db_session, client, product):
 def test_invoice_flow_success(db_session, sample_client, sample_product, monkeypatch):
     # Monkey‑patch the email sender to avoid real SMTP calls
     mock_send_email = mock.Mock(return_value=True)
-    monkeypatch.setattr("app.services.email.send_invoice_email", mock_send_email)
+    monkeypatch.setattr("app.services.invoice.send_invoice_email", mock_send_email)
+    monkeypatch.setattr("app.services.dian_client._decision_from_file", lambda x: "accepted")
 
     # Prepare a deterministic payload for the validator
     payload = {"client_id": sample_client.id, "line_items": [{"product_id": sample_product.id, "quantity": 1, "unit_price": sample_product.price, "iva_percent": sample_product.iva_percent}]}
@@ -115,7 +118,9 @@ def test_invoice_flow_success(db_session, sample_client, sample_product, monkeyp
         # Email should have been called once with the correct attachments
         mock_send_email.assert_called_once()
         args, kwargs = mock_send_email.call_args
-        assert kwargs["xml_path"] == header.xml_path
+        # xml_path should point to the signed XML file
+        expected_xml = str(Path(header.xml_path).parent / f"{header.cufe}_signed.xml")
+        assert kwargs["xml_path"] == expected_xml
         assert kwargs["pdf_path"] == header.pdf_path
     else:
         # No email should be sent for rejected invoices

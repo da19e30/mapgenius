@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#131b2e",
+                        "inverse-surface": "#303032",
+                        "surface-tint": "#565e74",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1b1b1d",
+                        "inverse-primary": "#bec6e0",
+                        "surface-dim": "#dcd9db",
+                        "surface-container-high": "#eae7e9",
+                        "primary-fixed": "#dae2fd",
+                        "on-tertiary-fixed": "#271901",
+                        "outline-variant": "#c6c6cd",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "surface-bright": "#fcf8fa",
+                        "background": "#fcf8fa",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-error-container": "#93000a",
+                        "outline": "#76777d",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-secondary-fixed": "#0b1c30",
+                        "tertiary": "#000000",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f3f0f2",
+                        "surface-variant": "#e4e2e4",
+                        "secondary": "#505f76",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#fcdeb5",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#271901",
+                        "secondary-container": "#d0e1fb",
+                        "primary-container": "#131b2e",
+                        "surface-container-low": "#f6f3f5",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-tertiary-container": "#98805d",
+                        "on-secondary-container": "#54647a",
+                        "on-primary-container": "#7c839b",
+                        "surface-container": "#f0edef",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-surface-variant": "#45464d",
+                        "primary": "#000000",
+                        "on-error": "#ffffff",
+                        "on-background": "#1b1b1d",
+                        "surface-container-highest": "#e4e2e4",
+                        "surface": "#fcf8fa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "3xl": "64px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "2xl": "48px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "h3": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "mono-data": ["Inter"],
+                        "h2": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface overflow-x-hidden">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-screen w-64 border-r border-slate-800 bg-slate-900 text-white shadow-2xl flex flex-col p-4 space-y-2 z-50">
+<div class="mb-8 px-4 py-2">
+<h1 class="text-2xl font-black text-white tracking-tighter">Mapgenius</h1>
+<p class="text-[11px] text-slate-400 font-medium tracking-widest uppercase">SaaS Contable</p>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md">Tablero</span>
+</div>
+<div class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md">Clientes</span>
+</div>
+<!-- Active Navigation State -->
+<div class="bg-emerald-600 text-white rounded-md flex items-center gap-3 px-4 py-2.5 shadow-lg shadow-emerald-900/40 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="inventory_2" data-weight="fill" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-label-md font-semibold">Productos</span>
+</div>
+<div class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-md">Facturación</span>
+</div>
+<div class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-md">Gastos</span>
+</div>
+<div class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md">Reportes</span>
+</div>
+</nav>
+<div class="pt-4 border-t border-slate-800 space-y-1">
+<div class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="font-label-md">Soporte</span>
+</div>
+<div class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md">Ajustes</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-40 h-16 bg-white border-b border-slate-200 shadow-sm flex justify-between items-center px-8">
+<div class="flex items-center gap-4">
+<span class="font-h3 text-slate-900">Catálogo de Productos y Servicios</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center bg-slate-100 rounded-lg px-3 py-1.5 border border-slate-200">
+<span class="material-symbols-outlined text-slate-400 mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-64 p-0" placeholder="Buscar por nombre o SKU..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-slate-500">
+<span class="material-symbols-outlined cursor-pointer hover:text-emerald-600 transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-emerald-600 transition-colors" data-icon="help">help</span>
+<div class="h-8 w-8 rounded-full bg-slate-200 overflow-hidden">
+<img alt="Avatar de contador" data-alt="Professional headshot of a mature financial accountant with a friendly smile, set in a bright corporate office with soft natural lighting and a minimalist background of blurred architectural lines. The aesthetic is clean and modern, conveying trust and expertise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDu6JofjOoRH4oJkU__OO1ja-hnf5_4FaaIo62O5lPYup1f7djeB1_MxQzHq5pX7mjP808kXeN3SuUrTHQqDQZ0HJk7Jk5vRfg3LT6xr4qOAoyaXGW2kq9XwdTUYqYHAwDrF_t4Qlc6a7aNOTHIZtfXsn7NRAS8461-mOCqXxyvagS2DM5griVQHkRDl72ZU5zVeOt9dvvNzXI68yOo9JPa3IV03OgiMFeKGMtITgX-30sybuin-W2qUye7jddAtYsWEG5A5yQKtHE"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="p-8 max-w-[1440px] mx-auto">
+<!-- Actions & Filters Bar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div class="flex items-center gap-2">
+<button class="bg-slate-100 hover:bg-slate-200 text-slate-900 px-4 py-2 rounded-lg font-label-md flex items-center gap-2 border border-slate-200 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
+                        Filtros
+                    </button>
+<div class="flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-slate-200">
+<button class="px-3 py-1.5 bg-white shadow-sm rounded-md text-emerald-600 font-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="table_chart">table_chart</span>
+                            Tabla
+                        </button>
+<button class="px-3 py-1.5 text-slate-500 hover:text-slate-700 font-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="grid_view">grid_view</span>
+                            Cuadrícula
+                        </button>
+</div>
+</div>
+<button class="bg-primary-container text-white px-5 py-2.5 rounded-lg font-label-md flex items-center gap-2 shadow-lg hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+                    Agregar Producto/Servicio
+                </button>
+</div>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Main Inventory Table Container -->
+<div class="col-span-12 lg:col-span-9">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 border-b border-slate-200">
+<th class="px-6 py-4 font-label-md text-slate-500 uppercase tracking-wider">Código/SKU</th>
+<th class="px-6 py-4 font-label-md text-slate-500 uppercase tracking-wider">Nombre del Producto</th>
+<th class="px-6 py-4 font-label-md text-slate-500 uppercase tracking-wider text-right">Precio Unitario</th>
+<th class="px-6 py-4 font-label-md text-slate-500 uppercase tracking-wider">Impuesto (DIAN)</th>
+<th class="px-6 py-4 font-label-md text-slate-500 uppercase tracking-wider">Stock</th>
+<th class="px-6 py-4 font-label-md text-slate-500 uppercase tracking-wider text-center">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-mono-data text-slate-600">PROD-00124</td>
+<td class="px-6 py-4 font-body-md font-semibold text-slate-900">Consultoría Financiera Premium</td>
+<td class="px-6 py-4 font-mono-data text-slate-900 text-right">$450.000</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                                            IVA 19%
+                                        </span>
+</td>
+<td class="px-6 py-4 font-body-md text-slate-500">N/A (Servicio)</td>
+<td class="px-6 py-4 text-center">
+<span class="material-symbols-outlined text-slate-400 hover:text-slate-600 cursor-pointer" data-icon="more_vert">more_vert</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-mono-data text-slate-600">SKU-9821</td>
+<td class="px-6 py-4 font-body-md font-semibold text-slate-900">Licencia Mapgenius Anual</td>
+<td class="px-6 py-4 font-mono-data text-slate-900 text-right">$1.200.000</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                                            IVA 19%
+                                        </span>
+</td>
+<td class="px-6 py-4 font-body-md text-slate-500">Ilimitado</td>
+<td class="px-6 py-4 text-center">
+<span class="material-symbols-outlined text-slate-400 hover:text-slate-600 cursor-pointer" data-icon="more_vert">more_vert</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-mono-data text-slate-600">STK-0045</td>
+<td class="px-6 py-4 font-body-md font-semibold text-slate-900">Libros Contables Foliados</td>
+<td class="px-6 py-4 font-mono-data text-slate-900 text-right">$85.000</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                                            IVA 5%
+                                        </span>
+</td>
+<td class="px-6 py-4 font-body-md text-error font-semibold">12 Unidades</td>
+<td class="px-6 py-4 text-center">
+<span class="material-symbols-outlined text-slate-400 hover:text-slate-600 cursor-pointer" data-icon="more_vert">more_vert</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors bg-red-50/30">
+<td class="px-6 py-4 font-mono-data text-slate-600">MISC-002</td>
+<td class="px-6 py-4 font-body-md font-semibold text-slate-900">Honorarios Terceros</td>
+<td class="px-6 py-4 font-mono-data text-slate-900 text-right">$250.000</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-error">
+<span class="material-symbols-outlined text-[16px]" data-icon="warning">warning</span>
+<span class="text-xs font-bold uppercase">Sin configurar</span>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-slate-500">N/A</td>
+<td class="px-6 py-4 text-center">
+<span class="material-symbols-outlined text-slate-400 hover:text-slate-600 cursor-pointer" data-icon="more_vert">more_vert</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-mono-data text-slate-600">PROD-0092</td>
+<td class="px-6 py-4 font-body-md font-semibold text-slate-900">Manual de Procedimientos DIAN</td>
+<td class="px-6 py-4 font-mono-data text-slate-900 text-right">$45.000</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">
+                                            Exento
+                                        </span>
+</td>
+<td class="px-6 py-4 font-body-md text-slate-500">45 Unidades</td>
+<td class="px-6 py-4 text-center">
+<span class="material-symbols-outlined text-slate-400 hover:text-slate-600 cursor-pointer" data-icon="more_vert">more_vert</span>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
+<p class="text-body-sm text-slate-500">Mostrando 5 de 124 productos</p>
+<div class="flex gap-2">
+<button class="p-1 rounded hover:bg-slate-200 text-slate-500"><span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span></button>
+<button class="p-1 rounded hover:bg-slate-200 text-slate-500"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- IA Insights Side Panel -->
+<aside class="col-span-12 lg:col-span-3 space-y-gutter">
+<!-- IA Insight Card 1 -->
+<div class="bg-gradient-to-br from-slate-900 to-emerald-950 rounded-xl p-6 shadow-xl text-white">
+<div class="flex items-center gap-3 mb-4">
+<div class="p-2 bg-emerald-500/20 rounded-lg">
+<span class="material-symbols-outlined text-emerald-400" data-icon="psychology">psychology</span>
+</div>
+<h3 class="font-h3 text-emerald-400">IA Insights</h3>
+</div>
+<p class="text-body-sm text-slate-300 mb-4 leading-relaxed">
+                            He detectado una inconsistencia normativa en <span class="text-white font-bold">1 producto</span>. El ítem "Honorarios Terceros" no tiene un código de impuesto DIAN asignado.
+                        </p>
+<button class="w-full bg-emerald-600 hover:bg-emerald-500 py-2.5 rounded-lg font-label-md transition-all">
+                            Corregir Ahora
+                        </button>
+</div>
+<!-- IA Insight Card 2 -->
+<div class="bg-white border border-emerald-100 rounded-xl p-6 shadow-sm">
+<div class="flex items-center gap-2 mb-4 text-emerald-700">
+<span class="material-symbols-outlined text-[20px]" data-icon="trending_up">trending_up</span>
+<span class="font-label-md uppercase tracking-wider">Análisis de Mercado</span>
+</div>
+<h4 class="font-body-md font-bold text-slate-900 mb-2">Sugerencia de Precio</h4>
+<p class="text-body-sm text-slate-600 mb-4">
+                            Según el índice de precios del sector, tu servicio de "Consultoría Premium" está un <span class="text-emerald-600 font-bold">12% por debajo</span> del promedio nacional.
+                        </p>
+<div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex items-center justify-between">
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold">Sugerido</p>
+<p class="font-mono-data text-emerald-700 font-bold">$504.000</p>
+</div>
+<button class="text-emerald-600 font-label-md hover:underline">Aplicar</button>
+</div>
+</div>
+<!-- Visual Assets Section -->
+<div class="rounded-xl overflow-hidden shadow-sm relative h-48 group">
+<img alt="Dashboard Analytics" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A sophisticated macro shot of a high-resolution tablet screen displaying complex financial bar charts and data visualization. The lighting is low and cinematic with cool blue and emerald green glows reflecting off the glass surface. The setting is a dark, luxury office at night, emphasizing professional excellence and data-driven decision making." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJw_9UpP-zHQ8xWDDWm0N7v9UfINHp9ez6byxs5eF6qmUt8GYG2RcxvXaJ0EQ5Xum9KdtxpsiCvmQ3zI31QQdYOMHGRfT0rGXdpp6MPc21mFexTfM-c2FR3CWMOj_2rPExzf4iAOkZYuXBK0DuVUqTB_6CsRWJCuDvDu0SnUVvZAoDc0DyILfVeAqFJ-8G1tiQPB1nOURDNTK1ANk9VszymN5FnyDKus2QzCknc7FhkQvrDtQ26JznUtB1REtZoq6jdw6gQifPqJ4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex flex-col justify-end p-4">
+<p class="text-white font-bold text-body-sm">Rendimiento Mensual</p>
+<p class="text-slate-300 text-[12px]">Ver reporte detallado</p>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<!-- FAB for quick access (Hidden on some screens as per mandate, but included for primary context here) -->
+<button class="fixed bottom-8 right-8 bg-emerald-600 text-white p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]" data-icon="add_task">add_task</span>
+</button>
+</body></html>

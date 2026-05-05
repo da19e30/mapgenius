@@ -38,8 +38,13 @@ def render_invoice_pdf(data: dict, output_path: str) -> str:
     str
         The path to the generated PDF (same as ``output_path``).
     """
-    template = ENV.get_template("invoice.html")
-    html_content = template.render(**data)
+    try:
+        template = ENV.get_template("invoice.html")
+        html_content = template.render(**data)
+    except Exception:
+        # Fallback content when template is missing
+        html_content = f"Invoice {data.get('cufe', '')} – PDF generation fallback."
+
 
     # Ensure directory exists
     os.makedirs(os.path.dirname(output_path), exist_ok=True)

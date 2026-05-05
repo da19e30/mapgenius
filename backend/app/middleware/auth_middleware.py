@@ -24,6 +24,8 @@ async def jwt_auth_middleware(request: Request, call_next):
     try:
         payload = decode_token(token)
         request.state.user_id = payload.get("sub")
+        # Tenant ID is optional for backward compatibility
+        request.state.tenant_id = payload.get("tenant_id")
     except Exception as exc:
         raise HTTPException(status_code=HTTP_401_UNAUTHORIZED, detail="Invalid token") from exc
     return await call_next(request)

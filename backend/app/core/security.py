@@ -7,23 +7,23 @@
 from datetime import datetime, timedelta
 from typing import Any
 
-from passlib.context import CryptContext
+import bcrypt
 from jose import JWTError, jwt
 
 from .config import settings
 
 # ---------------------------------------------------------------------------
-# Password hashing
+# Password hashing (using bcrypt directly)
 # ---------------------------------------------------------------------------
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+import bcrypt
 
 
 def get_password_hash(password: str) -> str:
-    return pwd_context.hash(password)
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    return pwd_context.verify(plain_password, hashed_password)
+    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
 
 # ---------------------------------------------------------------------------
 # JWT handling
@@ -62,10 +62,5 @@ def decode_without_verify(token: str) -> dict[str, Any]:
     """Decode a JWT without signature verification.
     Useful for extracting ``jti`` and ``exp`` when we only need to check revocation.
     """
-    # jose.jwt provides ``options`` to skip verification
-    return jwt.decode(token, options={"verify_signature": False})
-    try:
-        payload = jwt.decode(token, settings.JWT_SECRET_KEY.get_secret_value(), algorithms=[settings.JWT_ALGORITHM])
-        return payload
-    except JWTError as exc:
-        raise exc  # Caller will translate to HTTPException
+    # jose.jwt requires a key even when skipping verification; empty string works.
+    return jwt.decode(token, "", options={"verify_signature": False})

@@ -4,8 +4,8 @@ export default function HealthCheck() {
   const [status, setStatus] = useState<string>('Loading...');
 
   useEffect(() => {
-    // Adjust the base URL if the backend runs on a different port or host.
-    fetch('http://localhost:8000/health')
+    const base = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    fetch(`${base}/api/v1/health`)
       .then((res) => res.json())
       .then((data) => setStatus(data.status ?? 'unknown'))
       .catch(() => setStatus('error'));

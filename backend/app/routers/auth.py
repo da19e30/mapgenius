@@ -28,8 +28,8 @@ async def register_user(payload: schemas.UserCreate, db: AsyncSession = Depends(
         full_name=payload.full_name,
         role=payload.role.value,
     )
-    access = create_access_token({"sub": str(user.id)})
-    refresh = create_refresh_token({"sub": str(user.id)})
+    access = create_access_token({"sub": str(user.id), "tenant_id": user.tenant_id})
+    refresh = create_refresh_token({"sub": str(user.id), "tenant_id": user.tenant_id})
     return schemas.Token(access_token=access, refresh_token=refresh)
 
 @router.post("/login", response_model=schemas.Token)
@@ -37,8 +37,8 @@ async def login_user(payload: schemas.UserCreate, db: AsyncSession = Depends(get
     user = await crud.user.get_by_email(db, payload.email)
     if not user or not verify_password(payload.password, user.hashed_password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
-    access = create_access_token({"sub": str(user.id)})
-    refresh = create_refresh_token({"sub": str(user.id)})
+    access = create_access_token({"sub": str(user.id), "tenant_id": user.tenant_id})
+    refresh = create_refresh_token({"sub": str(user.id), "tenant_id": user.tenant_id})
     return schemas.Token(access_token=access, refresh_token=refresh)
 
 @router.post("/refresh", response_model=schemas.Token)
@@ -50,10 +50,20 @@ async def refresh_token(payload: dict = Body(...), db: AsyncSession = Depends(ge
     try:
         token_data = decode_token(refresh_token)
         user_id = token_data.get("sub")
+        tenant_id = token_data.get("tenant_id")
+        # If tenant_id not in token, fetch from DB
+        if not tenant_id:
+            from app.crud import user as user_crud
+            user = await user_crud.get(db, int(user_id))
+            if user:
+                tenant_id = user.tenant_id
     except Exception:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid refresh token")
-    access = create_access_token({"sub": user_id})
-    new_refresh = create_refresh_token({"sub": user_id})
+    token_payload = {"sub": user_id}
+    if tenant_id:
+        token_payload["tenant_id"] = tenant_id
+    access = create_access_token(token_payload)
+    new_refresh = create_refresh_token(token_payload)
     return schemas.Token(access_token=access, refresh_token=new_refresh)
 
 @router.post("/revoke", response_model=dict)

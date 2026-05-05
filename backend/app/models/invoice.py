@@ -5,7 +5,7 @@ Fields include status workflow, monetary fields, XML/PDF storage (as binary blob
 
 from sqlalchemy import Column, Integer, String, Float, DateTime, LargeBinary, Enum, ForeignKey, func
 from sqlalchemy.orm import relationship
-from app.db.base import Base
+from app.database import Base
 import enum
 
 class InvoiceStatus(str, enum.Enum):
@@ -30,5 +30,7 @@ class Invoice(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     # Relationships
-    owner = relationship("User", back_populates="invoices")
+    owner = relationship("User", back_populates="invoice_records")
     tax_events = relationship("TaxEvent", back_populates="invoice")
+    tax_exports = relationship("TaxExportLog", back_populates="invoice")
+    financial_data = relationship("FinancialData", back_populates="invoice")

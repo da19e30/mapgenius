@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#131b2e",
+                        "inverse-surface": "#303032",
+                        "surface-tint": "#565e74",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1b1b1d",
+                        "inverse-primary": "#bec6e0",
+                        "surface-dim": "#dcd9db",
+                        "surface-container-high": "#eae7e9",
+                        "primary-fixed": "#dae2fd",
+                        "on-tertiary-fixed": "#271901",
+                        "outline-variant": "#c6c6cd",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "surface-bright": "#fcf8fa",
+                        "background": "#fcf8fa",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-error-container": "#93000a",
+                        "outline": "#76777d",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-secondary-fixed": "#0b1c30",
+                        "tertiary": "#000000",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f3f0f2",
+                        "surface-variant": "#e4e2e4",
+                        "secondary": "#505f76",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#fcdeb5",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#271901",
+                        "secondary-container": "#d0e1fb",
+                        "primary-container": "#131b2e",
+                        "surface-container-low": "#f6f3f5",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-tertiary-container": "#98805d",
+                        "on-secondary-container": "#54647a",
+                        "on-primary-container": "#7c839b",
+                        "surface-container": "#f0edef",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-surface-variant": "#45464d",
+                        "primary": "#000000",
+                        "on-error": "#ffffff",
+                        "on-background": "#1b1b1d",
+                        "surface-container-highest": "#e4e2e4",
+                        "surface": "#fcf8fa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "3xl": "64px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "2xl": "48px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "h3": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "mono-data": ["Inter"],
+                        "h2": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-hidden">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 border-r border-slate-800 bg-slate-900 text-white shadow-2xl z-40">
+<div class="flex flex-col h-full p-4 space-y-2">
+<div class="flex items-center gap-3 px-2 py-6">
+<div class="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center shadow-lg shadow-emerald-900/40">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div>
+<h1 class="text-2xl font-black text-white tracking-tighter">Mapgenius</h1>
+<p class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">SaaS Contable</p>
+</div>
+</div>
+<nav class="flex-1 mt-6 space-y-1">
+<a class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md">Tablero</span>
+</a>
+<!-- Active State: Clientes -->
+<a class="bg-emerald-600 text-white rounded-md flex items-center gap-3 px-4 py-2.5 shadow-lg shadow-emerald-900/40" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-body-md font-semibold">Clientes</span>
+</a>
+<a class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-body-md">Productos</span>
+</a>
+<a class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-body-md">Facturaci\u00f3n</span>
+</a>
+<a class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-body-md">Gastos</span>
+</a>
+<a class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-body-md">Reportes</span>
+</a>
+</nav>
+<div class="pt-4 border-t border-slate-800 space-y-1">
+<a class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="font-body-md">Soporte</span>
+</a>
+<a class="text-slate-400 flex items-center gap-3 px-4 py-2.5 hover:bg-slate-800 hover:text-slate-100 rounded-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md">Ajustes</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 bg-surface-container-lowest flex flex-col h-full relative">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-6 h-16 bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+<span class="material-symbols-outlined text-sm">search</span>
+</span>
+<input class="pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-body-sm focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none w-80 transition-all" placeholder="Buscar por NIT o Nombre..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-slate-500 font-body-sm font-medium cursor-pointer hover:text-emerald-600 transition-colors">Documentaci\u00f3n</span>
+<div class="flex items-center gap-4 text-slate-500">
+<span class="material-symbols-outlined cursor-pointer hover:text-emerald-600 transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-emerald-600 transition-colors" data-icon="help">help</span>
+<div class="h-8 w-8 rounded-full bg-slate-200 border border-slate-300 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a financial accountant in a clean, bright studio setting. The individual is wearing a charcoal suit and has a warm, confident expression. Soft, diffused lighting creates a professional and trustworthy atmosphere with a neutral, slightly out-of-focus background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPD4tg_ishvADQghj1QjTollPktwNPB1mVCHOHQi4GpxU7Mwgh9sh4zF4BRmtaMoXTguSnJa92Ds9mU8nfA0NeEKcUZxISVHCB2m9OtFAaltkmWVrELmgEiHF8Gp76Pk7i1q_k-aHThHYO_i3SXQasC5pj3z3_l4AnwIdjUjWkQKKP7JPi9Fa7vytSHlWbVjueRmYEitpXleDFyIb5-m03hFLIltlEz5cRtjrzVq8Wd8xlBw6Q_lDIMyFBks9wTaeWHStYvWu6V5s"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 flex-1 overflow-y-auto">
+<!-- Header Actions -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="text-h1 font-h1 text-on-surface">Directorio de Clientes</h2>
+<p class="text-body-md text-on-surface-variant">Gestiona y visualiza la información fiscal de tu cartera de clientes.</p>
+</div>
+<button class="bg-primary text-white px-6 py-2.5 rounded-lg font-body-md font-semibold flex items-center gap-2 shadow-lg shadow-primary/20 hover:bg-slate-800 transition-all active:scale-95">
+<span class="material-symbols-outlined">add</span>
+                        Nuevo Cliente
+                    </button>
+</div>
+<!-- Table Card -->
+<div class="bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-6 py-4 text-label-md text-on-surface-variant uppercase tracking-wider">Cliente</th>
+<th class="px-6 py-4 text-label-md text-on-surface-variant uppercase tracking-wider">Régimen</th>
+<th class="px-6 py-4 text-label-md text-on-surface-variant uppercase tracking-wider">Ciudad</th>
+<th class="px-6 py-4 text-label-md text-on-surface-variant uppercase tracking-wider">Estado DIAN</th>
+<th class="px-6 py-4 text-label-md text-on-surface-variant uppercase tracking-wider text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50/80 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-body-lg">TC</div>
+<div>
+<div class="font-body-md font-bold text-on-surface">TechSolutions Colombia S.A.S</div>
+<div class="text-body-sm text-on-surface-variant">NIT: 900.456.789-1</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">Común (IVA)</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">Bogotá D.C.</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                                        Validado
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-emerald-600 p-1 transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+<button class="text-on-surface-variant hover:text-emerald-600 p-1 transition-colors ml-2"><span class="material-symbols-outlined">edit</span></button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50/80 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-tertiary-fixed text-on-tertiary-container flex items-center justify-center font-bold text-body-lg">AL</div>
+<div>
+<div class="font-body-md font-bold text-on-surface">Alimentos del Llano E.U.</div>
+<div class="text-body-sm text-on-surface-variant">NIT: 800.123.456-7</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">Simplificado</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">Villavicencio</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+                                        Pendiente
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-emerald-600 p-1 transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+<button class="text-on-surface-variant hover:text-emerald-600 p-1 transition-colors ml-2"><span class="material-symbols-outlined">edit</span></button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50/80 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-body-lg">JM</div>
+<div>
+<div class="font-body-md font-bold text-on-surface">Juan Manuel Restrepo</div>
+<div class="text-body-sm text-on-surface-variant">CC: 1.018.455.321</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">No responsable IVA</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">Medellín</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                                        Validado
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-emerald-600 p-1 transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+<button class="text-on-surface-variant hover:text-emerald-600 p-1 transition-colors ml-2"><span class="material-symbols-outlined">edit</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination Placeholder -->
+<div class="px-6 py-4 border-t border-slate-100 flex items-center justify-between">
+<span class="text-body-sm text-on-surface-variant font-mono-data">Mostrando 1-3 de 48 clientes</span>
+<div class="flex gap-2">
+<button class="p-2 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="p-2 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal/Sidebar Overlay: Nuevo Cliente -->
+<div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex justify-end">
+<div class="w-[480px] bg-white h-full shadow-2xl flex flex-col transform transition-transform duration-300">
+<!-- Form Header -->
+<div class="px-8 py-6 border-b border-slate-100 flex items-center justify-between">
+<div>
+<h3 class="text-h3 text-on-surface">Nuevo Cliente</h3>
+<p class="text-body-sm text-on-surface-variant">Completa los datos fiscales para el registro.</p>
+</div>
+<button class="text-slate-400 hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Form Content -->
+<div class="flex-1 overflow-y-auto px-8 py-8">
+<form class="space-y-6">
+<!-- Razón Social -->
+<div class="space-y-2">
+<label class="block text-label-md text-on-surface-variant uppercase">Razón Social o Nombre Completo</label>
+<input class="w-full px-4 py-2.5 border border-outline rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all outline-none text-body-md" placeholder="Ej: Inversiones Globales S.A.S" type="text"/>
+</div>
+<!-- NIT + DV -->
+<div class="grid grid-cols-4 gap-4">
+<div class="col-span-3 space-y-2">
+<label class="block text-label-md text-on-surface-variant uppercase">NIT / Documento</label>
+<input class="w-full px-4 py-2.5 border border-outline rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all outline-none text-body-md" placeholder="800123456" type="text"/>
+</div>
+<div class="col-span-1 space-y-2">
+<label class="block text-label-md text-on-surface-variant uppercase">DV</label>
+<input class="w-full px-4 py-2.5 border border-outline rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all outline-none text-body-md text-center" placeholder="1" type="text"/>
+</div>
+</div>
+<!-- Tipo Persona -->
+<div class="space-y-2">
+<label class="block text-label-md text-on-surface-variant uppercase">Tipo de Persona</label>
+<div class="grid grid-cols-2 gap-3">
+<label class="flex items-center justify-center gap-2 p-3 border-2 border-emerald-600 bg-emerald-50/50 rounded-lg cursor-pointer">
+<input checked="" class="hidden" name="persona" type="radio"/>
+<span class="material-symbols-outlined text-emerald-600" style="font-variation-settings: 'FILL' 1;">business</span>
+<span class="font-body-md font-semibold text-emerald-800">Jurídica</span>
+</label>
+<label class="flex items-center justify-center gap-2 p-3 border border-outline rounded-lg cursor-pointer hover:bg-slate-50">
+<input class="hidden" name="persona" type="radio"/>
+<span class="material-symbols-outlined text-slate-400">person</span>
+<span class="font-body-md font-semibold text-on-surface-variant">Natural</span>
+</label>
+</div>
+</div>
+<!-- Responsabilidad Fiscal -->
+<div class="space-y-2">
+<label class="block text-label-md text-on-surface-variant uppercase">Responsabilidad Fiscal</label>
+<select class="w-full px-4 py-2.5 border border-outline rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all outline-none text-body-md appearance-none bg-white">
+<option>O-13 Gran Contribuyente</option>
+<option selected="">O-48 Impuesto sobre las ventas - IVA</option>
+<option>O-49 No responsable de IVA</option>
+<option>O-52 Régimen Simple de Tributación</option>
+</select>
+</div>
+<!-- Correo Facturación -->
+<div class="space-y-2">
+<label class="block text-label-md text-on-surface-variant uppercase">Correo para recepción de facturas</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+<span class="material-symbols-outlined text-sm">mail</span>
+</span>
+<input class="w-full pl-10 pr-4 py-2.5 border border-outline rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all outline-none text-body-md" placeholder="facturacion@cliente.com" type="email"/>
+</div>
+<p class="text-[11px] text-on-surface-variant italic">Este correo se usará para el envío automático de facturas electrónicas.</p>
+</div>
+</form>
+</div>
+<!-- Form Footer -->
+<div class="px-8 py-6 border-t border-slate-100 bg-surface-container-low flex gap-3">
+<button class="flex-1 bg-white border border-outline text-on-surface-variant py-2.5 rounded-lg font-body-md font-semibold hover:bg-slate-50 transition-all">Cancelar</button>
+<button class="flex-1 bg-emerald-600 text-white py-2.5 rounded-lg font-body-md font-semibold hover:bg-emerald-700 shadow-lg shadow-emerald-900/20 transition-all">Guardar Cliente</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
